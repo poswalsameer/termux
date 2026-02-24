@@ -1,5 +1,5 @@
 import { LLMProvider } from "./types"
-import { MockProvider } from "./mockProvider"
+import { ApiProvider } from "./apiProvider"
 
-// Swap this out with your real API provider (e.g. ApiProvider) in the future.
-export const provider: LLMProvider = new MockProvider()
+// Using the real API provider that connects to our Next.js backend route
+export const provider: LLMProvider = new ApiProvider()
