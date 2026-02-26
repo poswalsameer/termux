@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react"
-import { Cursor } from "./Cursor"
 import { useTerminalHistory } from "@/hooks/useTerminalHistory"
+import { Cursor } from "./cursor"
+import { PromptPrefix } from "./prompt-prefix"
 
 interface TerminalInputProps {
   onSubmit: (text: string) => void
@@ -20,6 +21,17 @@ export function TerminalInput({ onSubmit, disabled }: TerminalInputProps) {
     document.addEventListener("click", handleGlobalClick)
     return () => document.removeEventListener("click", handleGlobalClick)
   }, [])
+
+  // Auto-focus when input becomes enabled again
+  useEffect(() => {
+    if (!disabled) {
+      // Small timeout to ensure the input is re-rendered as enabled before focusing
+      const timer = setTimeout(() => {
+        inputRef.current?.focus()
+      }, 0)
+      return () => clearTimeout(timer)
+    }
+  }, [disabled])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !disabled && input.trim()) {
@@ -43,8 +55,10 @@ export function TerminalInput({ onSubmit, disabled }: TerminalInputProps) {
   }
 
   return (
-    <div className="flex items-center font-mono text-sm sm:text-base w-full mt-2">
-      <span className="text-primary mr-2 flex-shrink-0">user@llm:~$</span>
+    <div className="flex items-center font-mono text-sm sm:text-base w-full mt-2 relative">
+      <div className="shrink-0 flex items-center pr-3">
+        <PromptPrefix role="user" />
+      </div>
       <div className="relative flex-1 flex items-center">
         {/* Hidden physical input for focus & mobile keyboards */}
         <input
@@ -59,7 +73,7 @@ export function TerminalInput({ onSubmit, disabled }: TerminalInputProps) {
           autoComplete="off"
         />
         {/* Rendered output + cursor */}
-        <span className="text-primary/90 whitespace-pre-wrap break-all pointer-events-none flex items-center min-h-[1.5rem]">
+        <span className="text-primary/90 whitespace-pre-wrap break-all pointer-events-none flex items-center min-h-6">
           {input}
           {!disabled && <Cursor />}
         </span>

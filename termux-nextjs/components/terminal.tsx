@@ -1,7 +1,10 @@
+import Header from "./header"
 import { useEffect, useRef } from "react"
 import { useChat } from "@/hooks/useChat"
-import { TerminalLine } from "./TerminalLine"
-import { TerminalInput } from "./TerminalInput"
+import { TerminalLine } from "./terminal-line"
+import { TerminalInput } from "./terminal-input"
+import { TerminalWelcome } from "./terminal-welcome"
+
 
 export function Terminal() {
   const { messages, isStreaming, sendMessage } = useChat()
@@ -17,20 +20,16 @@ export function Terminal() {
 
   return (
     <div
-      className="flex flex-col h-screen w-full bg-background text-primary overflow-hidden p-4 sm:p-6 lg:p-10 selection:bg-accent/30 selection:text-primary"
+      className="flex flex-col rounded-3xl h-full w-full bg-zinc-950 text-primary overflow-hidden selection:bg-accent/30 selection:text-primary shadow-2xl border border-white/5"
     >
+      <Header />
+
+      {/* Terminal Content */}
       <div
         ref={containerRef}
-        className="flex-1 overflow-y-auto space-y-4 pb-16 custom-scrollbar scroll-smooth"
+        className="flex-1 overflow-y-auto space-y-4 p-4 sm:p-6 lg:p-8 pb-16 custom-scrollbar scroll-smooth"
       >
-        {messages.length === 0 && (
-          <div className="text-muted font-mono mb-6">
-            <p>Welcome to the AI Terminal.</p>
-            <p>Type `&apos;`help&apos;` for available commands.</p>
-            <p className="mt-4">Loading system definitions... [OK]</p>
-            <p>Establishing LLM link... [OK]</p>
-          </div>
-        )}
+        {messages.length === 0 && <TerminalWelcome />}
 
         {messages.map((msg, idx) => {
           const isLast = idx === messages.length - 1

@@ -3,17 +3,17 @@
 @import "shadcn/tailwind.css";
 
 @theme inline {
-  --color-background: #0b0f10;
-  --color-foreground: #a6e3a1;
+  --color-background: #11111b;
+  --color-foreground: #d8b4e2; /* aesthetic soft purple */
 
-  --color-primary: #a6e3a1;
-  --color-primary-foreground: #0b0f10;
+  --color-primary: #89b4fa;
+  --color-primary-foreground: #11111b;
 
-  --color-accent: #89dceb;
-  --color-accent-foreground: #0b0f10;
+  --color-accent: #cba6f7;
+  --color-accent-foreground: #11111b;
 
   --color-muted: #6b7280;
-  --color-muted-foreground: #9ca3af;
+  --color-muted-foreground: #bac2de;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
