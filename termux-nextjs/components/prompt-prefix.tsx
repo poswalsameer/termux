@@ -8,14 +8,14 @@ export function PromptPrefix({ role }: PromptPrefixProps) {
   // Use distinct colors for user vs assistant
   const isUser = role === "user"
 
-  // Segment 1: user@llm or assistant@llm
-  const seg1Bg = isUser ? "#8aadf4" : "#89b4fa" // Consistent Blue tones
-  const seg1Fg = "#181825"
-  const seg1Text = isUser ? "user@llm" : "assistant@llm"
+  // Segment 1: user or assistant
+  const seg1Bg = isUser ? "#79c0ff" : "#d2a8ff" // Blue for user, Purple for assistant
+  const seg1Fg = "#0f1117"
+  const seg1Text = isUser ? "user" : "assistant"
 
-  // Segment 2: ~
-  const seg2Bg = "#a6da95" // Green
-  const seg2Fg = "#181825"
+  // Segment 2: directory
+  const seg2Bg = "#58a6ff" // Blue
+  const seg2Fg = "#0f1117"
   const seg2Text = "~"
 
   return (

@@ -72,8 +72,7 @@ export function TerminalInput({ onSubmit, disabled }: TerminalInputProps) {
           spellCheck={false}
           autoComplete="off"
         />
-        {/* Rendered output + cursor */}
-        <span className="text-primary/90 whitespace-pre-wrap break-all pointer-events-none flex items-center min-h-6">
+        <span className="text-[#79c0ff] whitespace-pre-wrap break-all pointer-events-none flex items-center min-h-6">
           {input}
           {!disabled && <Cursor />}
         </span>

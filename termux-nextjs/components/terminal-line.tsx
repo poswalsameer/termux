@@ -20,8 +20,12 @@ export function TerminalLine({ message, isLast, isStreaming }: TerminalLineProps
   }
 
   const getTextColor = () => {
-    if (message.role === "system") return "text-muted"
-    return "text-foreground/90"
+    switch (message.role) {
+      case "system": return "text-[#79c0ff]"
+      case "user": return "text-[#79c0ff]"
+      case "assistant": return "text-[#d2a8ff]"
+      default: return "text-foreground"
+    }
   }
 
   return (

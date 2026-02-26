@@ -20,7 +20,7 @@ export function Terminal() {
 
   return (
     <div
-      className="flex flex-col rounded-3xl h-full w-full bg-zinc-950 text-primary overflow-hidden selection:bg-accent/30 selection:text-primary shadow-2xl border border-white/5"
+      className="flex flex-col rounded-3xl h-full w-full bg-zinc-950 text-primary overflow-hidden selection:bg-accent/30 selection:text-primary shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
     >
       <Header />
 

@@ -3,17 +3,21 @@
 @import "shadcn/tailwind.css";
 
 @theme inline {
-  --color-background: #11111b;
-  --color-foreground: #d8b4e2; /* aesthetic soft purple */
+  --color-background: #0f1117;
+  --color-foreground: #e6edf3;
 
-  --color-primary: #89b4fa;
-  --color-primary-foreground: #11111b;
+  --color-primary: #79c0ff;
+  --color-primary-foreground: #0f1117;
 
-  --color-accent: #cba6f7;
-  --color-accent-foreground: #11111b;
+  --color-accent: #d2a8ff;
+  --color-accent-foreground: #0f1117;
 
-  --color-muted: #6b7280;
-  --color-muted-foreground: #bac2de;
+  --color-muted: #8b949e;
+  --color-muted-foreground: #e6edf3;
+
+  --color-surface: #161a22;
+  --color-elevated: #1d2330;
+  --color-border: #242b3a;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -22,5 +26,21 @@
 @layer base {
   body {
     @apply bg-background text-foreground tracking-tight;
+  }
+}
+
+@layer utilities {
+  .animate-blink {
+    animation: blink 1s step-end infinite;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
   }
 }
