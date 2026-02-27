@@ -1,6 +1,6 @@
+import { provider } from "@/api-client"
+import type { ChatMessage } from "@/types"
 import { useState, useCallback } from "react"
-import { ChatMessage } from "@/types/chat"
-import { provider } from "@/lib/llm/provider"
 
 export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([])
@@ -44,7 +44,7 @@ export function useChat() {
       return true
     }
 
-    return false // Not a system command
+    return false
   }, [clearMessages])
 
   const sendMessage = useCallback(async (content: string) => {
@@ -60,12 +60,10 @@ export function useChat() {
 
     setMessages((prev) => [...prev, userMsg])
 
-    // 2. Intercept local commands
     if (handleSystemCommand(content)) {
       return
     }
 
-    // 3. Start assistant stream
     setIsStreaming(true)
 
     const assistantId = crypto.randomUUID()
@@ -80,7 +78,7 @@ export function useChat() {
     ])
 
     try {
-      const generator = provider.streamChat([userMsg]) // pass history if needed
+      const generator = provider.streamChat([userMsg])
 
       let chunkedContent = ""
       for await (const chunk of generator) {

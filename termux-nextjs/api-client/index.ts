@@ -1,5 +1,4 @@
-import { ChatMessage } from "@/types/chat"
-import { LLMProvider } from "./types"
+import type { ChatMessage, LLMProvider } from "@/types"
 
 export class ApiProvider implements LLMProvider {
   async *streamChat(messages: ChatMessage[]): AsyncGenerator<string> {
@@ -36,3 +35,5 @@ export class ApiProvider implements LLMProvider {
     }
   }
 }
+
+export const provider: LLMProvider = new ApiProvider()

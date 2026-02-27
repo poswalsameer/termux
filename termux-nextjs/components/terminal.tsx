@@ -1,6 +1,6 @@
 import Header from "./header"
 import { useEffect, useRef } from "react"
-import { useChat } from "@/hooks/useChat"
+import { useChat } from "@/hooks/use-chat"
 import { TerminalLine } from "./terminal-line"
 import { TerminalInput } from "./terminal-input"
 import { TerminalWelcome } from "./terminal-welcome"
@@ -24,7 +24,6 @@ export function Terminal() {
     >
       <Header />
 
-      {/* Terminal Content */}
       <div
         ref={containerRef}
         className="flex-1 overflow-y-auto space-y-4 p-4 sm:p-6 lg:p-8 pb-16 custom-scrollbar scroll-smooth"

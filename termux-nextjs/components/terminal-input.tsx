@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react"
-import { useTerminalHistory } from "@/hooks/useTerminalHistory"
+import { useTerminalHistory } from "@/hooks/use-terminal-history"
 import { Cursor } from "./cursor"
 import { PromptPrefix } from "./prompt-prefix"
 
