@@ -8,8 +8,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "AI Terminal",
-  description: "A Ghostty-inspired frontend-only LLM interface",
+  title: "Termux - chat with LLM terminal style",
+  description: "Chat with LLM in terminal style",
 }
 
 export default function RootLayout({
