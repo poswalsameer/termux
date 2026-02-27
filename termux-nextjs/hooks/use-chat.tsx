@@ -37,7 +37,31 @@ export function useChat() {
         {
           id: crypto.randomUUID(),
           role: "system",
-          content: "System: Ghostty-inspired frontend LLM Terminal.\nVersion: 1.0.0\nArchitecture: Next.js App Router, Tailwind, Streaming UI.",
+          content: (
+            <span>
+              System: Termux<br />
+              Version: 1.0.0<br />
+              Built By:{" "}
+              <a
+                href="https://sameerposwal.xyz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                Sameer Poswal
+              </a>
+              <br />
+              Contribute Here:{" "}
+              <a
+                href="https://github.com/poswalsameer/termux"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                https://github.com/poswalsameer/termux
+              </a>
+            </span>
+          ),
           createdAt: new Date(),
         }
       ])

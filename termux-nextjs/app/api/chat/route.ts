@@ -1,6 +1,6 @@
 import OpenAI from "openai"
 import { NextRequest } from "next/server"
-import { systemPrompt } from "@/lib/system-prompt"
+import { systemPrompt } from "@/constants/system-prompt"
 
 const openai = new OpenAI({
   apiKey: process.env.NVIDIA_API_KEY || "",

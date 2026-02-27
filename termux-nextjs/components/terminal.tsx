@@ -26,7 +26,7 @@ export function Terminal() {
 
       <div
         ref={containerRef}
-        className="flex-1 overflow-y-auto space-y-4 p-4 sm:p-6 lg:p-8 pb-16 custom-scrollbar scroll-smooth"
+        className="flex-1 overflow-y-auto space-y-4 p-4 sm:p-6 lg:p-8 pb-16 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       >
         {messages.length === 0 && <TerminalWelcome />}
 

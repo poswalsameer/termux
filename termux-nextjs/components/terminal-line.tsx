@@ -1,14 +1,16 @@
 import { ChatMessage } from "@/types"
 import { PromptPrefix } from "./prompt-prefix"
 
-interface TerminalLineProps {
+export function TerminalLine({
+  message,
+  isLast,
+  isStreaming
+}: {
   message: ChatMessage
   isLast?: boolean
   isStreaming?: boolean
-}
-
-export function TerminalLine({ message, isLast, isStreaming }: TerminalLineProps) {
-  const getPrefix = () => {
+}) {
+  function getPrefix() {
     switch (message.role) {
       case "user":
         return <PromptPrefix role="user" />
@@ -19,7 +21,7 @@ export function TerminalLine({ message, isLast, isStreaming }: TerminalLineProps
     }
   }
 
-  const getTextColor = () => {
+  function getTextColor() {
     switch (message.role) {
       case "system": return "text-[#79c0ff]"
       case "user": return "text-[#79c0ff]"
@@ -29,7 +31,7 @@ export function TerminalLine({ message, isLast, isStreaming }: TerminalLineProps
   }
 
   return (
-    <div className={`font-mono text-sm sm:text-base leading-relaxed wrap-break-word whitespace-pre-wrap ${getTextColor()} flex items-start gap-1 sm:gap-0`}>
+    <div className={`font-mono text-base sm:text-lg leading-relaxed wrap-break-word whitespace-pre-wrap ${getTextColor()} flex items-start gap-1 sm:gap-0`}>
       <div className="shrink-0 pt-[2px]">
         {getPrefix()}
       </div>

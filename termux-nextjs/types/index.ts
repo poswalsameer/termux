@@ -1,7 +1,9 @@
+import { ReactNode } from "react"
+
 export type ChatMessage = {
   id: string
   role: "user" | "assistant" | "system"
-  content: string
+  content: string | ReactNode
   createdAt: Date
 }
 

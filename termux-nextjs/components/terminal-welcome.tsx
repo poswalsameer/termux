@@ -1,7 +1,6 @@
 export function TerminalWelcome() {
   return (
     <div className="w-full min-h-[60vh] flex flex-col items-center justify-center space-y-8 tracking-tighter">
-      {/* ASCII Art Logo (Solid Color, No Gradients/Glows) */}
       <div className="font-mono text-accent select-none">
         <pre className="text-[10px] sm:text-xs md:text-sm lg:text-base font-bold leading-[1.15] drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
           {`

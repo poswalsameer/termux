@@ -1,17 +1,45 @@
-import { useState, useRef, useEffect } from "react"
-import { useTerminalHistory } from "@/hooks/use-terminal-history"
 import { Cursor } from "./cursor"
 import { PromptPrefix } from "./prompt-prefix"
+import { useState, useRef, useEffect } from "react"
+import { useTerminalHistory } from "@/hooks/use-terminal-history"
 
-interface TerminalInputProps {
+export function TerminalInput({
+  onSubmit,
+  disabled
+}: {
   onSubmit: (text: string) => void
   disabled?: boolean
-}
+}) {
+  const [input, setInput] = useState<string>("")
 
-export function TerminalInput({ onSubmit, disabled }: TerminalInputProps) {
-  const [input, setInput] = useState("")
   const inputRef = useRef<HTMLInputElement>(null)
-  const { addToHistory, getNextCommand, getPreviousCommand, resetHistoryIndex } = useTerminalHistory()
+  const {
+    addToHistory,
+    getNextCommand,
+    getPreviousCommand,
+    resetHistoryIndex
+  } = useTerminalHistory()
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter" && !disabled && input.trim()) {
+      onSubmit(input)
+      addToHistory(input)
+      setInput("")
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault()
+      const prev = getPreviousCommand()
+      if (prev !== null) setInput(prev)
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault()
+      const next = getNextCommand()
+      setInput(next)
+    }
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setInput(e.target.value)
+    resetHistoryIndex()
+  }
 
   // Keep focus on input if clicking anywhere
   useEffect(() => {
@@ -33,34 +61,12 @@ export function TerminalInput({ onSubmit, disabled }: TerminalInputProps) {
     }
   }, [disabled])
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && !disabled && input.trim()) {
-      onSubmit(input)
-      addToHistory(input)
-      setInput("")
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault()
-      const prev = getPreviousCommand()
-      if (prev !== null) setInput(prev)
-    } else if (e.key === "ArrowDown") {
-      e.preventDefault()
-      const next = getNextCommand()
-      setInput(next)
-    }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value)
-    resetHistoryIndex()
-  }
-
   return (
-    <div className="flex items-center font-mono text-sm sm:text-base w-full mt-2 relative">
+    <div className="flex items-center font-mono text-base sm:text-lg w-full mt-2 relative">
       <div className="shrink-0 flex items-center pr-3">
         <PromptPrefix role="user" />
       </div>
       <div className="relative flex-1 flex items-center">
-        {/* Hidden physical input for focus & mobile keyboards */}
         <input
           ref={inputRef}
           value={input}
